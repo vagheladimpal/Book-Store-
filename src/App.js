@@ -5,7 +5,9 @@ import { Card } from './Component/Card';
 function App() {
   return (
     <div className="App">
+    <div>
     <Card/>
+    </div>
     </div>
   );
 }
