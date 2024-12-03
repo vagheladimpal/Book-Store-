@@ -1,37 +1,31 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Toast from "../Component/Toast";
 import { instance } from "../AxiosMethod/Axios";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [name, setName] = useState("");
   const navigate = useNavigate();
-  
-  const handleSubmit = (e) => {
+  const handleRegisterSubmit = (e) => {
     e.preventDefault();
     const payload = {
+      name: name,
       email: email,
       password: password,
     };
 
-    console.log(payload);
-
     instance
-      .get("login", payload)
+      .post("/user", payload)
       .then((res) => {
-        // localStorage.setItem("token", JSON.stringify(res.data.access_token));
-        alert("your Login successfully");
-        // navigate("/dashbord")
-        console.log("Login successfully", res);
+        console.log(res);
+         navigate("/login")
+         alert("Register success");
       })
       .catch((error) => {
-        alert("your login fail");
-        console.error("Login failed", error);
+        console.log(error);
       });
   };
-
   return (
     <>
       <div className="bg-sky-100 flex justify-center items-center h-screen">
@@ -45,8 +39,21 @@ const Login = () => {
         </div>
         {/* <!-- Right: Login Form --> */}
         <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
-          <h1 className="text-2xl font-semibold mb-4">Login</h1>
-          <form onSubmit={handleSubmit}>
+          <h1 className="text-2xl font-semibold mb-4">Register</h1>
+          <form onSubmit={handleRegisterSubmit}>
+            {/* <!-- Email Input --> */}
+            <div className="mb-4 bg-sky-100">
+              <label htmlFor="email" className="block text-gray-600">
+                Name
+              </label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
             {/* <!-- Email Input --> */}
             <div className="mb-4 bg-sky-100">
               <label htmlFor="email" className="block text-gray-600">
@@ -84,7 +91,7 @@ const Login = () => {
               type="submit"
               className="bg-red-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full"
             >
-              Login
+              Register
             </button>
           </form>
         </div>
@@ -92,4 +99,5 @@ const Login = () => {
     </>
   );
 };
-export default Login;
+
+export default Register;

@@ -1,16 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
-import { Card } from './Component/Card';
-import { Login } from './Pages/Login';
+import { BrowserRouter, Routes,Route  } from "react-router-dom";
+import "./App.css";
+import Login from "./Pages/Login"
+import { Dashbord } from "./Pages/Dashbord";
+import Register from "./Pages/Register";
 
 function App() {
   return (
-   <>
-   <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-    <Login/>
-   </>
+    <>
+  
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Register/>} />
+          <Route path="login" element={<Login/>} />
+          <Route path="dashbord" element={<Dashbord/>} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
