@@ -1,10 +1,16 @@
+const { StayPrimaryLandscape } = require('@mui/icons-material');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors:{
+        primary:"#001f58"
+      }
+    },
   },
   plugins: [],
 }
